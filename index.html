@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rose Day Surprise</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-pink: #d81b60;
+            --soft-pink: #fff0f5;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--soft-pink);
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden; 
+            text-align: center;
+        }
+
+        .container {
+            z-index: 10;
+            padding: 20px;
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            color: var(--primary-pink);
+            font-size: 4rem;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+        }
+
+        /* GIF Styling with floating animation */
+        .rose-gif {
+            width: 250px; 
+            height: auto;
+            margin: 10px 0;
+            border-radius: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        p {
+            color: #555;
+            font-size: 1.1rem;
+            max-width: 500px;
+            line-height: 1.6;
+            margin: 15px auto;
+        }
+
+        .btn {
+            background-color: var(--primary-pink);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(216, 27, 96, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 20;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(216, 27, 96, 0.5);
+        }
+
+        /* --- Secret Note Overlay --- */
+        #noteOverlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .note-content {
+            background: white;
+            padding: 40px;
+            border-radius: 25px;
+            max-width: 320px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .close-btn {
+            margin-top: 25px;
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            color: #777;
+        }
+
+        /* --- Continuous Falling Items --- */
+        .petal {
+            position: fixed;
+            top: -10%;
+            user-select: none;
+            z-index: 1;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>💖Happy Rose Day, Love💖</h1>
+        
+        <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcG5mNXNwYWJpbjMwaDliOGIxaDZteHk0eWdzZ3NwamM0cHR0aDZpaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6fIThK51NGQByXyo/giphy.gif" alt="Sparkling Rose" class="rose-gif">
+
+        <p>Just like this rose, my PUSSY grows and BLOOMS for YOU !!!<br> More beautifully every single day.</p>
+        
+        <button class="btn" onclick="openNote()"> Siclet </button>
+    </div>
+
+    <div id="noteOverlay" onclick="closeNote()">
+        <div class="note-content" onclick="event.stopPropagation()">
+            <h2 style="color: var(--primary-pink); font-family: 'Great Vibes'; font-size: 2.5rem; margin: 0 0 15px 0;">My Siclet Note</h2>
+            <p style="font-size: 1.2rem; color: #333;">"🍆 You're the BEST FIRST AND LAST DICK that ever happened to me 🍆! "</p>
+            <button class="close-btn" onclick="closeNote()">Close Note</button>
+        </div>
+    </div>
+
+    <script>
+        // 1. Infinite Falling Petals & Flowers
+        function createPetal() {
+            const petal = document.createElement('div');
+            const items = ['🌸', '🌹', '✨', '💖', '🫦', '🥰', '💋','💍']; 
+            petal.innerHTML = items[Math.floor(Math.random() * items.length)];
+            petal.classList.add('petal');
+            
+            petal.style.left = Math.random() * 100 + 'vw';
+            // Varied speeds for a natural feel
+            petal.style.animationDuration = (Math.random() * 3 + 5) + 's'; 
+            petal.style.fontSize = (Math.random() * 1 + 1) + 'rem';
+            
+            document.body.appendChild(petal);
+
+            setTimeout(() => { petal.remove(); }, 8000);
+        }
+
+        // Creates a petal every 400ms forever
+        setInterval(createPetal, 400);
+
+        // 2. Secret Note Functions
+        function openNote() {
+            document.getElementById('noteOverlay').style.display = 'flex';
+        }
+
+        function closeNote() {
+            document.getElementById('noteOverlay').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
